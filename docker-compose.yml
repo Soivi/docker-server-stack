@@ -18,6 +18,7 @@ services:
       - VIRTUAL_PROTO=https
     links:
       - mysql-wp-soivi
+      - fpm-wp-soivi
     volumes:
       - /docker/www/nginx-wp-soivi:/usr/share/nginx/html
       - ./secrets/certs/soivi:/etc/nginx/certs:ro
@@ -30,3 +31,11 @@ services:
     extends:
       file: ./secrets/soivi.yml
       service: mysql-wp-soivi
+
+  fpm-wp-soivi:
+    image: kiuru/php:5.6.15-fpm
+    volumes:
+      - /docker/www/nginx-wp-soivi:/usr/share/nginx/html
+      - ./php.ini:/usr/local/etc/php/php.ini:ro
+    links:
+      - mysql-wp-soivi
