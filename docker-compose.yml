@@ -5,22 +5,28 @@ services:
     container_name: nginx-proxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./secrets/certs/soivi:/etc/nginx/certs:ro
 
   nginx-wp-soivi:
     image: nginx:1.11
     environment:
       - VIRTUAL_HOST=soivi.net
+      - VIRTUAL_PORT=443
+      - VIRTUAL_PROTO=https
     links:
       - mysql-wp-soivi
     volumes:
       - /docker/www/nginx-wp-soivi:/usr/share/nginx/html
+      - ./secrets/certs/soivi:/etc/nginx/certs:ro
+      - ./conf.d:/etc/nginx/conf.d:ro
 
   mysql-wp-soivi:
     image: mysql:5.5
     volumes:
-      - /docker/data/mysql-wp-soivi
+      - /docker/data/mysql-wp-soivi:/var/lib/mysql
     extends:
       file: ./secrets/soivi.yml
       service: mysql-wp-soivi
