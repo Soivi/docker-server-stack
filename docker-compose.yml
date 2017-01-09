@@ -12,3 +12,13 @@ services:
     image: nginx:1.11
     environment:
       - VIRTUAL_HOST=soivi.net
+    links:
+      - mysql-wp-soivi
+
+  mysql-wp-soivi:
+    image: mysql:5.5
+    volumes:
+      - /docker/data/mysql-wp-soivi
+    extends:
+      file: ./secrets/soivi.yml
+      service: mysql-wp-soivi
