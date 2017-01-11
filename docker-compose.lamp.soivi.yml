@@ -1,8 +1,9 @@
 version: '2'
 services:
-  httpd-lamp-soivi:
-    image: httpd:2.4
+  apachephp-lamp-soivi:
+    image: php:7.1-apache
     volumes:
-      - /docker/www/httpd-lamp-soivi:/usr/local/apache2/htdocs/
+      - /docker/www/httpd-lamp-soivi:/var/www/html
+      - ./wp.soivi/php.ini:/usr/local/etc/php/php.ini:ro
     ports:
       - "80:80"
