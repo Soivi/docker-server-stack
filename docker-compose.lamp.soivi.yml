@@ -1,9 +1,19 @@
 version: '2'
 services:
   apachephp-lamp-soivi:
-    image: php:7.1-apache
+    build: images/apachephp
     volumes:
       - /docker/www/httpd-lamp-soivi:/var/www/html
-      - ./wp.soivi/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./wp-soivi/php.ini:/usr/local/etc/php/php.ini:ro
     ports:
       - "80:80"
+    links:
+      - mysql-lamp-soivi
+
+  mysql-lamp-soivi:
+    image: mysql:5.5
+    volumes:
+      - /docker/data/mysql-lamp-soivi:/var/lib/mysql
+    extends:
+      file: ./secrets/lamp-soivi.yml
+      service: mysql-lamp-soivi
