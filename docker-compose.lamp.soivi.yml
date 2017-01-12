@@ -3,8 +3,9 @@ services:
   apachephp-lamp-soivi:
     build: images/apachephp
     volumes:
-      - /docker/www/httpd-lamp-soivi:/var/www/html
+      - /docker/www/apachephp-lamp-soivi:/var/www/html
       - ./wp-soivi/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./secrets/lamp-soivi/sites-enabled:/etc/apache2/sites-enabled:ro
     ports:
       - "80:80"
     links:
