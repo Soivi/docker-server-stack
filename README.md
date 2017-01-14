@@ -9,3 +9,7 @@ sudo apt install mysql-client
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dockerserverstack_mysql-wp-soivi_1
 172.21.0.3
 mysql <database> -u <user> -p -h <ip> < ~/backup/20170109_wordpress.sql
+
+
+sudo chown -R 33:33 wordpress/
+sudo chmod -R 755 wp-content/
