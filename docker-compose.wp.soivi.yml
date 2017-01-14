@@ -23,7 +23,7 @@ services:
       service: mysql-wp-soivi
 
   fpm-wp-soivi:
-    image: kiuru/php:5.6.15-fpm
+    build: images/nginxphp
     volumes:
       - /docker/www/nginx-wp-soivi:/usr/share/nginx/html
       - ./wp-soivi/php.ini:/usr/local/etc/php/php.ini:ro
