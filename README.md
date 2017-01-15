@@ -3,6 +3,8 @@
 
 $ mkdir -p ~/backup  
 $ mysqldump -u user -p <database name> | gzip -9 > ~/backup/$(date +"%Y%m%d")_wordpress.sql.gz  
+$ mysqldump -u <user> -p <database name> > ~/backup/$(date +"%Y%m%d")_wordpress.sql.gz
+
 $ tar -zcvf ~/backup/$(date +"%Y%m%d")_wordpress-dir.tar.gz /home/user/public_html/wordpress  
 
 sudo apt install mysql-client  
