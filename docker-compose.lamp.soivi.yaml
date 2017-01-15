@@ -4,8 +4,8 @@ services:
     build: images/apachephp
     volumes:
       - /docker/www/apachephp-lamp-soivi:/var/www/html
-      - ./wp-soivi/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./secrets/lamp-soivi/sites-enabled:/etc/apache2/sites-enabled:ro
+      - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./configures/lamp-soivi/sites-enabled:/etc/apache2/sites-enabled:ro
     ports:
       - "80:80"
     links:
@@ -16,5 +16,5 @@ services:
     volumes:
       - /docker/data/mysql-lamp-soivi:/var/lib/mysql
     extends:
-      file: ./secrets/lamp-soivi.yml
+      file: ./secrets/soivi.yaml
       service: mysql-lamp-soivi

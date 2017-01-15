@@ -12,20 +12,20 @@ services:
     volumes:
       - /docker/www/nginx-wp-soivi:/usr/share/nginx/html
       - ./secrets/certs:/etc/nginx/certs:ro
-      - ./wp-soivi/conf.d:/etc/nginx/conf.d:ro
+      - ./configures/wp-soivi/conf.d:/etc/nginx/conf.d:ro
 
   mysql-wp-soivi:
     image: mysql:5.5
     volumes:
       - /docker/data/mysql-wp-soivi:/var/lib/mysql
     extends:
-      file: ./secrets/wp-soivi.yml
+      file: ./secrets/soivi.yaml
       service: mysql-wp-soivi
 
   fpm-wp-soivi:
     build: images/nginxphp
     volumes:
       - /docker/www/nginx-wp-soivi:/usr/share/nginx/html
-      - ./wp-soivi/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
     links:
       - mysql-wp-soivi
