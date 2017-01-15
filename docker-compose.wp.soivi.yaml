@@ -15,7 +15,7 @@ services:
       - ./configures/wp-soivi/conf.d:/etc/nginx/conf.d:ro
 
   mysql-wp-soivi:
-    image: mysql:5.5
+    image: mysql:8.0
     volumes:
       - /docker/data/mysql-wp-soivi:/var/lib/mysql
     extends:
