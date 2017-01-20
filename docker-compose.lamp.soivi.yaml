@@ -6,8 +6,10 @@ services:
       - /docker/www/apachephp-lamp-soivi:/var/www/html
       - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
       - ./configures/lamp-soivi/sites-enabled:/etc/apache2/sites-enabled:ro
+      - ./secrets/certs:/etc/apache2/ssl:ro
     ports:
       - "80:80"
+      - "443:443"
     links:
       - mysql-lamp-soivi
 
