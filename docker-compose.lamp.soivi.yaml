@@ -7,10 +7,14 @@ services:
       - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
       - ./configures/lamp-soivi/sites-enabled:/etc/apache2/sites-enabled:ro
       - ./secrets/certs:/etc/apache2/ssl:ro
-    ports:
-      - "443:443"
     links:
       - mysql-lamp-soivi
+    environment:
+      - VIRTUAL_HOST=site1.soivi.net
+      - VIRTUAL_PORT=443
+      - VIRTUAL_PROTO=https
+    expose:
+      - 443
 
   mysql-lamp-soivi:
     image: mysql:8.0
