@@ -1,5 +1,6 @@
 # docker-server-stack
 
+## Importing & setting up an existing mysql database to a docker container volume:
 
 $ mkdir -p ~/backup
 $ mysqldump -u user -p <database name> | gzip -9 > ~/backup/$(date +"%Y%m%d")_wordpress.sql.gz
