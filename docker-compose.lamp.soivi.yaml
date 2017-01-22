@@ -1,0 +1,25 @@
+version: '2'
+services:
+  apachephp-lamp-soivi:
+    build: images/apachephp
+    volumes:
+      - /docker/www/apachephp-lamp-soivi:/var/www/html
+      - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./configures/lamp-soivi/sites-enabled:/etc/apache2/sites-enabled:ro
+      - ./secrets/certs:/etc/apache2/ssl:ro
+    links:
+      - mysql-lamp-soivi
+    environment:
+      - VIRTUAL_HOST=site1.soivi.net
+      - VIRTUAL_PORT=443
+      - VIRTUAL_PROTO=https
+    expose:
+      - "443"
+
+  mysql-lamp-soivi:
+    image: mysql:8.0
+    volumes:
+      - /docker/data/mysql-lamp-soivi:/var/lib/mysql
+    extends:
+      file: ./secrets/soivi.yaml
+      service: mysql-lamp-soivi
