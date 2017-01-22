@@ -20,7 +20,8 @@ services:
       driver: fluentd
       options:
         tag: docker.apachephp-lamp-soivi
-
+    depends_on:
+      - "fluentd"
 
   mysql-lamp-soivi:
     image: mysql:8.0
@@ -35,4 +36,5 @@ services:
         tag: docker.mysql-lamp-soivi
     environment:
       - TZ=Europe/Helsinki
-
+    depends_on:
+      - "fluentd"

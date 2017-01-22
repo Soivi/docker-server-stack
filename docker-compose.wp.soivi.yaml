@@ -18,6 +18,8 @@ services:
       driver: fluentd
       options:
         tag: docker.nginx-wp-soivi
+    depends_on:
+      - "fluentd"
 
   mysql-wp-soivi:
     image: mysql:8.0
@@ -32,6 +34,8 @@ services:
         tag: docker.mysql-wp-soivi
     environment:
       - TZ=Europe/Helsinki
+    depends_on:
+      - "fluentd"
 
   fpm-wp-soivi:
     build: images/nginxphp
@@ -46,3 +50,6 @@ services:
         tag: docker.fpm-wp-soivi
     environment:
       - TZ=Europe/Helsinki
+    depends_on:
+      - "fluentd"
+

@@ -15,3 +15,5 @@ services:
         tag: docker.ngingx-proxy
     environment:
       - TZ=Europe/Helsinki
+    depends_on:
+      - "fluentd"
