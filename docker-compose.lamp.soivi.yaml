@@ -13,8 +13,14 @@ services:
       - VIRTUAL_HOST=site1.soivi.net
       - VIRTUAL_PORT=443
       - VIRTUAL_PROTO=https
+      - TZ=Europe/Helsinki
     expose:
       - "443"
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.apachephp-lamp-soivi
+
 
   mysql-lamp-soivi:
     image: mysql:8.0
@@ -23,3 +29,10 @@ services:
     extends:
       file: ./secrets/soivi.yaml
       service: mysql-lamp-soivi
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.mysql-lamp-soivi
+    environment:
+      - TZ=Europe/Helsinki
+

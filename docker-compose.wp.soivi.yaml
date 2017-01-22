@@ -6,6 +6,7 @@ services:
       - VIRTUAL_HOST=soivi.net
       - VIRTUAL_PORT=443
       - VIRTUAL_PROTO=https
+      - TZ=Europe/Helsinki
     links:
       - mysql-wp-soivi
       - fpm-wp-soivi
@@ -13,6 +14,10 @@ services:
       - /docker/www/nginx-wp-soivi:/usr/share/nginx/html
       - ./secrets/certs:/etc/nginx/certs:ro
       - ./configures/wp-soivi/conf.d:/etc/nginx/conf.d:ro
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.nginx-wp-soivi
 
   mysql-wp-soivi:
     image: mysql:8.0
@@ -21,6 +26,12 @@ services:
     extends:
       file: ./secrets/soivi.yaml
       service: mysql-wp-soivi
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.mysql-wp-soivi
+    environment:
+      - TZ=Europe/Helsinki
 
   fpm-wp-soivi:
     build: images/nginxphp
@@ -29,3 +40,9 @@ services:
       - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
     links:
       - mysql-wp-soivi
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.fpm-wp-soivi
+    environment:
+      - TZ=Europe/Helsinki
