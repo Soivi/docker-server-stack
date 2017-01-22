@@ -1,0 +1,32 @@
+version: '2'
+services:
+  web:
+    image: nginx:1.11.8
+    restart: always
+    ports:
+      - "443:443"
+    links:
+      - fpm
+      - mysli
+    volumes:
+      - ./nginx/sites:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    environment:
+      - VIRTUAL_HOST=samuelkontiomaa.com
+      - VIRTUAL_PORT=443
+      - VIRTUAL_PROTO=https
+
+  fpm:
+    build: ./nginxphp
+    restart: always
+    volumes:
+      - ./nginx/sites:/usr/share/nginx/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini:ro
+    links:
+      - mysli
+
+  mysli:
+    image: mysql:8.0
+    volumes:
+      - ./mysli:/var/lib/mysql
