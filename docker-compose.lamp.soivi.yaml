@@ -10,7 +10,7 @@ services:
     links:
       - mysql-lamp-soivi
     environment:
-      - VIRTUAL_HOST=site1.soivi.net
+      - VIRTUAL_HOST=site1.soivi.net,datajournalismi.soivi.net,download.soivi.net
       - VIRTUAL_PORT=443
       - VIRTUAL_PROTO=https
       - TZ=Europe/Helsinki
