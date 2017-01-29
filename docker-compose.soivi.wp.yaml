@@ -1,6 +1,7 @@
 version: '2'
 services:
   soivi-wp-nginx:
+    restart: always
     image: nginx:1.11
     environment:
       - VIRTUAL_HOST=soivi.net
@@ -20,6 +21,7 @@ services:
         tag: docker.soivi-wp-nginx
 
   soivi-wp-mysql:
+    restart: always
     image: mysql:8.0
     volumes:
       - /docker/data/soivi-wp-mysql:/var/lib/mysql
@@ -34,6 +36,7 @@ services:
       - TZ=Europe/Helsinki
 
   soivi-wp-fpm:
+    restart: always
     build: images/nginxphp
     volumes:
       - /docker/www/soivi-wp-nginx:/usr/share/nginx/html

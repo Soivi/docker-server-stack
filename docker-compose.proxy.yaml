@@ -1,6 +1,7 @@
 version: '2'
 services:
   nginx-proxy:
+    restart: always
     image: jwilder/nginx-proxy:0.5.0
     ports:
       - "80:80"

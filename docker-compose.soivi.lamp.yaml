@@ -1,6 +1,7 @@
 version: '2'
 services:
   soivi-lamp-apachephp:
+    restart: always
     build: images/apachephp
     volumes:
       - /docker/www/soivi-lamp-apachephp:/var/www/html
@@ -22,6 +23,7 @@ services:
         tag: docker.soivi-lamp-apachephp
 
   soivi-lamp-mysql:
+    restart: always
     image: mysql:8.0
     volumes:
       - /docker/data/soivi-lamp-mysql:/var/lib/mysql
