@@ -1,0 +1,12 @@
+version: '2'
+services:
+  fluentd:
+#    restart: always
+    image: fluent/fluentd:v0.14.11
+    ports:
+      - 24224:24224
+    volumes:
+      - ./configures/fluent.conf:/fluentd/etc/fluent.conf:ro
+      - /docker/log/fluentd:/fluentd/log
+    environment:
+      - TZ=Europe/Helsinki
