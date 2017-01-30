@@ -1,14 +1,15 @@
 version: '2'
 services:
-  apachephp-lamp-soivi:
+  soivi-lamp-apachephp:
+    restart: always
     build: images/apachephp
     volumes:
-      - /docker/www/apachephp-lamp-soivi:/var/www/html
+      - /docker/www/soivi-lamp-apachephp:/var/www/html
       - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./configures/lamp-soivi/sites-enabled:/etc/apache2/sites-enabled:ro
+      - ./configures/soivi-lamp/sites-enabled:/etc/apache2/sites-enabled:ro
       - ./secrets/certs:/etc/apache2/ssl:ro
     links:
-      - mysql-lamp-soivi
+      - soivi-lamp-mysql
     environment:
       - VIRTUAL_HOST=site1.soivi.net,datajournalismi.soivi.net,download.soivi.net
       - VIRTUAL_PORT=443
@@ -19,22 +20,19 @@ services:
     logging:
       driver: fluentd
       options:
-        tag: docker.apachephp-lamp-soivi
-    depends_on:
-      - "fluentd"
+        tag: docker.soivi-lamp-apachephp
 
-  mysql-lamp-soivi:
+  soivi-lamp-mysql:
+    restart: always
     image: mysql:8.0
     volumes:
-      - /docker/data/mysql-lamp-soivi:/var/lib/mysql
+      - /docker/data/soivi-lamp-mysql:/var/lib/mysql
     extends:
       file: ./secrets/soivi.yaml
-      service: mysql-lamp-soivi
+      service: soivi-lamp-mysql
     logging:
       driver: fluentd
       options:
-        tag: docker.mysql-lamp-soivi
+        tag: docker.soivi-lamp-mysql
     environment:
       - TZ=Europe/Helsinki
-    depends_on:
-      - "fluentd"
