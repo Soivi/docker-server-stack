@@ -1,11 +1,11 @@
 version: '2'
 services:
-  web:
+  kontiomaa-wp-nginx:
     image: nginx:1.11.8
     restart: always
     links:
-      - fpm
-      - mysli
+      - kontiomaa-wp-fpm
+      - kontiomaa-wp-mysql
     volumes:
       - ./nginx/sites:/usr/share/nginx/html
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
@@ -15,16 +15,17 @@ services:
       - VIRTUAL_PORT=443
       - VIRTUAL_PROTO=https
 
-  fpm:
+  kontiomaa-wp-fpm:
     build: ./nginxphp
     restart: always
     volumes:
       - ./nginx/sites:/usr/share/nginx/html
       - ./php/php.ini:/usr/local/etc/php/php.ini:ro
     links:
-      - mysli
+      - kontiomaa-wp-mysql
 
-  mysli:
+  kontiomaa-wp-mysql:
     image: mysql:8.0
+    restart: always
     volumes:
       - ./mysli:/var/lib/mysql
