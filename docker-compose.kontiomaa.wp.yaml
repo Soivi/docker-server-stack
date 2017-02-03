@@ -21,7 +21,7 @@ services:
         tag: docker.kontiomaa-wp-nginx
 
   kontiomaa-wp-fpm:
-    build: ./nginxphp
+    build: ./images/nginxphp
     restart: always
     volumes:
       - /docker/www/kontiomaa-wp-nginx:/usr/share/nginx/html
