@@ -1,7 +1,7 @@
 version: '2'
 services:
   kontiomaa-wp-nginx:
-    image: nginx:1.11.8
+    image: nginx:1.11
     restart: always
     links:
       - kontiomaa-wp-fpm
