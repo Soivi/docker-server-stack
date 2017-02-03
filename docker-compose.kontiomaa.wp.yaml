@@ -7,25 +7,45 @@ services:
       - kontiomaa-wp-fpm
       - kontiomaa-wp-mysql
     volumes:
-      - ./nginx/sites:/usr/share/nginx/html
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./nginx/certs:/etc/nginx/certs:ro
+      - /docker/www/kontiomaa-wp-nginx:/usr/share/nginx/html
+      - ./configures/kontiomaa-wp/conf.d:/etc/nginx/conf.d:ro
+      - ./secrets/certs:/etc/nginx/certs:ro
     environment:
       - VIRTUAL_HOST=samuelkontiomaa.com
       - VIRTUAL_PORT=443
       - VIRTUAL_PROTO=https
+      - TZ=Europe/Helsinki
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.kontiomaa-wp-nginx
 
   kontiomaa-wp-fpm:
     build: ./nginxphp
     restart: always
     volumes:
-      - ./nginx/sites:/usr/share/nginx/html
-      - ./php/php.ini:/usr/local/etc/php/php.ini:ro
+      - /docker/www/kontiomaa-wp-nginx:/usr/share/nginx/html
+      - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
     links:
       - kontiomaa-wp-mysql
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.kontiomaa-wp-fpm
+    environment:
+      - TZ=Europe/Helsinki
 
   kontiomaa-wp-mysql:
     image: mysql:8.0
     restart: always
     volumes:
-      - ./mysli:/var/lib/mysql
+      - /docker/data/kontiomaa-wp-mysql:/var/lib/mysql
+    extends:
+      file: ./secrets/kontiomaa.yaml
+      service: kontiomaa-wp-mysql
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.kontiomaa-wp-mysql
+    environment:
+      - TZ=Europe/Helsinki
