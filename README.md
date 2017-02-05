@@ -86,7 +86,7 @@ logpath  = /var/log/auth.log
 maxretry = 6
 bantime  = 6000
 ```
-Restart jail2ban service and check your sshd rule is enabled
+Restart jail2ban service and check that your sshd rule is enabled
 ```
 $ sudo service fail2ban restart
 $ sudo fail2ban-client status
@@ -97,10 +97,9 @@ Status
 
 ```
 
-### Install softwares what you need or are nice to have
+### Install software that you need or is nice to have
 ```
-$ sudo apt install tree pwgen
-$ sudo apt install git mysql-client
+$ sudo apt install curl git mysql-client tree pwgen
 ```
 
 ## Install docker-engine and docker-compose
@@ -110,11 +109,10 @@ Source doc: https://docs.docker.com/engine/installation/linux/ubuntu/
 
 Add docker to package list etc.
 ```
-$ sudo apt-get install curl \
-    linux-image-extra-$(uname -r) \
-    linux-image-extra-virtual
-$ sudo apt-get install apt-transport-https \
-                       ca-certificates
+$ sudo apt-get install linux-image-extra-$(uname -r) \
+    linux-image-extra-virtual \
+    apt-transport-https \
+    ca-certificates
 $ curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
 $ apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
 $ sudo apt-get install software-properties-common
@@ -146,7 +144,7 @@ $ docker-compose --version
 ```
 
 ### Reboot server
-This is good point to restart server
+This is good point to restart the server
 ```
 $ sudo reboot
 ```
