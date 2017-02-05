@@ -14,6 +14,12 @@ Logout and login in with new user
 ```
 $ ssh <user>@<ip>
 ```
+
+Update APT package list and update server
+```
+$ sudo apt update && sudo apt dist-upgrade
+```
+
 Disable root and try to login with root. It shouldn't work anymore
 ```
 $ sudo passwd -l root
@@ -30,9 +36,9 @@ $ echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
-### Update APT package list, install NTP and configure timezone to Helsinki
+### Install NTP and configure timezone to Helsinki
 ```
-$ sudo apt update && sudo apt install ntp
+$ sudo apt install ntp
 $ echo "Europe/Helsinki" | sudo tee /etc/timezone
 $ sudo dpkg-reconfigure -f noninteractive tzdata
 ```
