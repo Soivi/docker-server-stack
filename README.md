@@ -30,9 +30,9 @@ $ echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
-###  Install NTP and configure timezone to Helsinki
+### Update APT package list, install NTP and configure timezone to Helsinki
 ```
-$ sudo apt install ntp
+$ sudo apt update && sudo apt install ntp
 $ echo "Europe/Helsinki" | sudo tee /etc/timezone
 $ sudo dpkg-reconfigure -f noninteractive tzdata
 ```
