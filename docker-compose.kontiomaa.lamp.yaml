@@ -4,7 +4,7 @@ services:
     restart: always
     build: images/apachephp
     volumes:
-      - /docker/www/kontiomaa-lamp-apachephp:var/www/html
+      - /docker/www/kontiomaa-lamp-apachephp:/var/www/html
       - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
       - ./configures/kontiomaa-lamp/sites-enabled:/etc/apache2/sites-enabled:ro
       - ./secrets/certs:/etc/apache2/ssl:ro
