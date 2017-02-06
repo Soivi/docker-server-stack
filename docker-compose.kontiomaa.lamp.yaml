@@ -1,0 +1,21 @@
+version: '2'
+services:
+  kontiomaa-lamp-apachephp:
+    restart: always
+    build: images/apachephp
+    volumes:
+      - /docker/www/kontiomaa-lamp-apachephp:var/www/html
+      - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./configures/kontiomaa-lamp/sites-enabled:/etc/apache2/sites-enabled:ro
+      - ./secrets/certs:/etc/apache2/ssl:ro
+    environment:
+      - VIRTUAL_HOST=games.samuelkontiomaa.com,projects.samuelkontiomaa.com,vpl.samuelkontiomaa.com
+      - VIRTUAL_PORT=443
+      - VIRTUAL_PROTO=https
+      - TZ=Europe/Helsinki
+    expose:
+      - "443"
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.kontiomaa-lamp-apachephp
