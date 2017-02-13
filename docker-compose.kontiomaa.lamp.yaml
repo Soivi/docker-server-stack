@@ -8,8 +8,10 @@ services:
       - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
       - ./configures/kontiomaa-lamp/sites-enabled:/etc/apache2/sites-enabled:ro
       - ./secrets/certs:/etc/apache2/ssl:ro
+    links:
+      - kontiomaa-lamp-mysql
     environment:
-      - VIRTUAL_HOST=games.samuelkontiomaa.com,projects.samuelkontiomaa.com,vpl.samuelkontiomaa.com
+      - VIRTUAL_HOST=games.samuelkontiomaa.com,projects.samuelkontiomaa.com,vpl.samuelkontiomaa.com,athmanager.samuelkontiomaa.com,membermanager.samuelkontiomaa.com
       - VIRTUAL_PORT=443
       - VIRTUAL_PROTO=https
       - TZ=Europe/Helsinki
@@ -19,3 +21,18 @@ services:
       driver: fluentd
       options:
         tag: docker.kontiomaa-lamp-apachephp
+
+  kontiomaa-lamp-mysql:
+    restart: always
+    image: mysql:8.0
+    volumes:
+      - /docker/data/kontiomaa-lamp-mysql:/var/lib/mysql
+    extends:
+      file: ./secrets/kontiomaa.yaml
+      service: kontiomaa-lamp-mysql
+    logging:
+      driver: fluentd
+      options:
+        tag: docker.kontiomaa-lamp-mysql
+    environment:
+      - TZ=Europe/Helsinki
