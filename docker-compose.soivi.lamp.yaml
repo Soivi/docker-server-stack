@@ -11,7 +11,7 @@ services:
     links:
       - soivi-lamp-mysql
     environment:
-      - VIRTUAL_HOST=site1.soivi.net,datajournalismi.soivi.net,download.soivi.net,colorreflex.soivi.net,colorreflex-angularjs.soivi.net
+      - VIRTUAL_HOST=colorreflex.soivi.net,colorreflex-angularjs.soivi.net,datajournalismi.soivi.net,download.soivi.net,postalcode.soivi.net,tester.soivi.net
       - VIRTUAL_PORT=443
       - VIRTUAL_PROTO=https
       - TZ=Europe/Helsinki
