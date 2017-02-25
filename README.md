@@ -155,21 +155,54 @@ This is good point to restart the server
 $ sudo reboot
 ```
 
-## Deploy docker-server-stack
+## Deploy
 
-### Clone docker-server-stack repository
-Create /docker folder and clone repository
+Extract enviroment
 ```
-$ sudo mkdir /docker
-$ cd /docker
-$ sudo git clone https://github.com/Soivi/docker-server-stack
-
-```
-Create needed folders
-```
-$ sudo mkdir www data log
+$ sudo tar -vxf /backup/<filename>.tar.xz -C /
 ```
 
+Pull latest version
+```
+$ cd /docker/docker-server-stack/
+$ sudo git pull
+```
+Start docker containers (fluent has to be first and proxy has to be last)
+```
+$ sudo docker-compose -f docker-compose.fluentd.yaml up -d
+$ sudo docker-compose -f docker-compose.soivi.lamp.yaml up -d
+$ sudo docker-compose -f docker-compose.kontiomaa.lamp.yaml up -d
+$ sudo docker-compose -f docker-compose.soivi.wp.yaml up -d
+$ sudo docker-compose -f docker-compose.kontiomaa.wp.yaml up -d
+$ sudo docker-compose -f docker-compose.proxy.yaml up -d
+```
+Add backup go weekly
+```
+$ sudo mkdir /backup
+$ sudoedit /etc/cron.weekly/docker_backup
+
+#! /bin/bash
+sudo tar cpfv /backup/$(date +"%Y%m%d-%T")_docker.tar.xz -I 'xz -9' /docker
+```
+
+## Useful commands
+
+Stop container
+```
+$ sudo docker-compose -f <filename>.yaml stop
+```
+Stop all containers
+```
+$ sudo docker stop $(sudo docker ps -a -q)
+```
+Delete all containers and volumes
+```
+$ sudo docker rm -v $(sudo docker ps -a -q)
+```
+Delete all images
+```
+$ sudo docker rmi $(sudo docker images -q)
+```
 
 ## Importing & setting up an existing mysql database to a docker container volume:
 
