@@ -187,9 +187,13 @@ sudo tar cpfv /backup/$(date +"%Y%m%d-%T")_docker.tar.xz -I 'xz -9' /docker
 
 ## Useful commands
 
-Stop container
+Stop docker-compose file containers
 ```
 $ sudo docker-compose -f <filename>.yaml stop
+```
+Delete docker-compose file containers and volumes
+```
+$ sudo docker-compose -f <filename>.yaml rm -v
 ```
 Stop all containers
 ```
