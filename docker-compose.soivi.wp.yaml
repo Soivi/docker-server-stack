@@ -25,9 +25,9 @@ services:
     image: mysql:8.0
     volumes:
       - /docker/data/soivi-wp-mysql:/var/lib/mysql
-    extends:
-      file: ./secrets/soivi.yaml
-      service: soivi-wp-mysql
+#    extends:
+#      file: ./secrets/soivi.yaml
+#      service: soivi-wp-mysql
     logging:
       driver: fluentd
       options:

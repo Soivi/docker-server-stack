@@ -27,9 +27,9 @@ services:
     image: mysql:8.0
     volumes:
       - /docker/data/soivi-lamp-mysql:/var/lib/mysql
-    extends:
-      file: ./secrets/soivi.yaml
-      service: soivi-lamp-mysql
+#    extends:
+#      file: ./secrets/soivi.yaml
+#      service: soivi-lamp-mysql
     logging:
       driver: fluentd
       options:
