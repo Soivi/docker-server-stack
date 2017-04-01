@@ -207,6 +207,20 @@ Delete all images
 ```
 $ sudo docker rmi $(sudo docker images -q)
 ```
+## Changing MySQL password
+
+Find out containers IP address
+```
+$ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name>
+```
+Change password
+```
+$ mysqladmin -u <user> -p'<old_password>' password '<new_password>' -h <ip-address>
+```
+Test new password
+```
+$ mysql -u <user> -p -h <ip-address>
+```
 
 ## Importing & setting up an existing mysql database to a docker container volume:
 
