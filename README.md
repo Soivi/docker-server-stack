@@ -182,7 +182,7 @@ $ sudo mkdir /backup
 $ sudoedit /etc/cron.weekly/docker_backup
 
 #! /bin/bash
-sudo tar cpfv /backup/$(date +"%Y%m%d-%T")_docker.tar.xz -I 'xz -9' /docker
+sudo tar cpfv /backup/$(date +"%Y%m%d-%H%M%S")_docker.tar.xz -I 'xz -9' /docker
 ```
 
 ## Useful commands
