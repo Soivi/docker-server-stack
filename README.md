@@ -157,7 +157,7 @@ $ sudo reboot
 
 ## Deploy
 
-Extract enviroment
+Extract environment
 ```
 $ sudo tar -vxf /backup/<filename>.tar.xz -C /
 ```
