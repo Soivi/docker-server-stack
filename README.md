@@ -185,6 +185,26 @@ $ sudoedit /etc/cron.weekly/docker_backup
 sudo tar cpfv /backup/$(date +"%Y%m%d-%H%M%S")_docker.tar.xz -I 'xz -9' /docker
 ```
 
+## Restarting containers and server
+
+Stop containers before reboot (this also removes volumes)
+```
+$ cd /docker/docker-server-stack/
+$ ./stopcontainers.sh
+```
+Reboot server
+```
+$ sudo reboot
+```
+After reboot stop container again. This because there are restart always on in compose files
+```
+cd /docker/docker-server-stack/
+./stopcontainers.sh
+```
+./startcontainers.sh
+```
+Now you have restarted server and containers
+
 ## Useful commands
 
 Stop docker-compose file containers
