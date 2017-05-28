@@ -196,12 +196,14 @@ Reboot server
 ```
 $ sudo reboot
 ```
-After reboot stop container again. This because there are restart always on in compose files
+After reboot stop container again. This because there is restart always on in compose files
 ```
-cd /docker/docker-server-stack/
-./stopcontainers.sh
+$ cd /docker/docker-server-stack/
+$ ./stopcontainers.sh
 ```
-./startcontainers.sh
+Now you can start all containers
+```
+$ ./startcontainers.sh
 ```
 Now you have restarted server and containers
 
