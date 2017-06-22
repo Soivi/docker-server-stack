@@ -196,7 +196,7 @@ Reboot server
 ```
 $ sudo reboot
 ```
-After reboot stop container again. This because there is restart always on in compose files
+After reboot stop container again. This because there are restart always in compose files and containers could start in wrong order when booting the server.
 ```
 $ cd /docker/docker-server-stack/
 $ ./stopcontainers.sh
