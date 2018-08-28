@@ -36,7 +36,7 @@ services:
       - TZ=Europe/Helsinki
 
   kontiomaa-wp-mysql:
-    image: mysql:8.0
+    image: mysql:8.0.12
     restart: always
     volumes:
       - /docker/data/kontiomaa-wp-mysql:/var/lib/mysql
