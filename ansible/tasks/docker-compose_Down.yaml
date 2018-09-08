@@ -1,0 +1,47 @@
+- name: docker-compose down proxy
+  shell: cd .. && docker-compose -f docker-compose.proxy.yaml down
+  register: proxy_status
+
+- debug: msg="{{ proxy_status.stdout }}"
+
+- name: docker-compose down soivi-lamp
+  shell: cd .. && docker-compose -f docker-compose.soivi.lamp.yaml down
+  register: soivi-lamp_status
+
+- debug: msg="{{ soivi-lamp_status.stdout }}"
+
+- name: docker-compose down soivi-wp
+  shell: cd .. && docker-compose -f docker-compose.soivi.wp.yaml down
+  register: soivi-wp_status
+
+- debug: msg="{{ soivi-wp_status.stdout }}"
+
+- name: docker-compose down kontiomaa-lamp
+  shell: cd .. && docker-compose -f docker-compose.kontiomaa.lamp.yaml down
+  register: kontiomaa-lamp_status
+
+- debug: msg="{{ kontiomaa-lamp_status.stdout }}"
+
+- name: docker-compose down kontiomaa-wp
+  shell: cd .. && docker-compose -f docker-compose.kontiomaa.wp.yaml down
+  register: kontiomaa-wp_status
+
+- debug: msg="{{ kontiomaa-wp_status.stdout }}"
+
+#- name: docker-compose down TiPi
+#  shell: cd .. && docker-compose -f docker-compose.tipi.yaml down
+#  register: tipi_status
+
+#- debug msg="{{ tipi_status.stdout }}"
+
+- name: docker-compose down fluentd
+  shell: cd .. && docker-compose -f docker-compose.fluentd.yaml down
+  register: fluentd_status
+
+- debug: msg="{{ fluentd_status.stdout }}"
+
+- name: Check docker ps
+  shell: docker ps
+  register: docker_status
+
+- debug: msg="{{ docker_status.stdout }}"

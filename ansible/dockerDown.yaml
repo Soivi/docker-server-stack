@@ -1,0 +1,4 @@
+- name: Down all containers.
+  hosts: localhost
+  become: yes
+  include: docker-compose_Down.yaml
