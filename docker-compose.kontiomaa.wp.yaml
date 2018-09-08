@@ -5,7 +5,7 @@ services:
     restart: always
     links:
       - kontiomaa-wp-fpm
-      - kontiomaa-wp-mysql
+      - kontiomaa-wp-maria
     volumes:
       - /docker/www/kontiomaa-wp-nginx:/usr/share/nginx/html
       - ./configures/kontiomaa-wp/conf.d:/etc/nginx/conf.d:ro
@@ -27,7 +27,7 @@ services:
       - /docker/www/kontiomaa-wp-nginx:/usr/share/nginx/html
       - ./configures/php.ini:/usr/local/etc/php/php.ini:ro
     links:
-      - kontiomaa-wp-mysql
+      - kontiomaa-wp-maria
     logging:
       driver: fluentd
       options:
@@ -35,17 +35,17 @@ services:
     environment:
       - TZ=Europe/Helsinki
 
-  kontiomaa-wp-mysql:
-    image: mysql:8.0.12
+  kontiomaa-wp-maria:
+    image: mariadb:10.3.9
     restart: always
     volumes:
-      - /docker/data/kontiomaa-wp-mysql:/var/lib/mysql
+      - /docker/data/kontiomaa-wp-maria:/var/lib/mysql
     extends:
       file: ./secrets/kontiomaa.yaml
-      service: kontiomaa-wp-mysql
+      service: kontiomaa-wp-maria
     logging:
       driver: fluentd
       options:
-        tag: docker.kontiomaa-wp-mysql
+        tag: docker.kontiomaa-wp-maria
     environment:
       - TZ=Europe/Helsinki
