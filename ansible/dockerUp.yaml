@@ -1,4 +1,0 @@
-- name: Up all containers.
-  hosts: localhost
-  become: yes
-  include: docker-compose_Up.yaml
