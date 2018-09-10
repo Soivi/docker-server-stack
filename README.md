@@ -110,6 +110,11 @@ $ sudo apt install curl git mysql-client tree pwgen
 
 ## Install docker-engine and docker-compose
 
+note: docker-compose seems to have been added to apt
+```
+$ sudo apt-get install docker-compose
+```
+
 ### Install docker-engine
 Source doc: https://docs.docker.com/engine/installation/linux/ubuntu/
 

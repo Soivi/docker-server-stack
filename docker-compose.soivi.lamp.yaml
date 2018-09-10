@@ -24,7 +24,7 @@ services:
 
   soivi-lamp-mysql:
     restart: always
-    image: mysql:8.0
+    image: mysql:8.0.0
     volumes:
       - /docker/data/soivi-lamp-mysql:/var/lib/mysql
 #    extends:

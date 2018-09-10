@@ -24,7 +24,7 @@ services:
 
   kontiomaa-lamp-mysql:
     restart: always
-    image: mysql:8.0
+    image: mysql:8.0.0
     volumes:
       - /docker/data/kontiomaa-lamp-mysql:/var/lib/mysql
     extends:
@@ -36,3 +36,4 @@ services:
         tag: docker.kontiomaa-lamp-mysql
     environment:
       - TZ=Europe/Helsinki
+  
