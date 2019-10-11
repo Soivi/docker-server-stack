@@ -42,7 +42,7 @@ $ sudo apt install ntp
 $ echo "Europe/Helsinki" | sudo tee /etc/timezone
 $ sudo dpkg-reconfigure -f noninteractive tzdata
 ```
-### Change ssh default port to 2222
+### Change ssh default port to 2222 and to listen specific address
 Backup sshd_config file and edit sshd_config
 ```
 $ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config_backup
@@ -53,6 +53,11 @@ Change ssh default port 22 to 2222. sshd_config file should look like this
 # What ports, IPs and protocols we listen for
 # Port 22
 Port 2222
+# Use these options to restrict which interfaces/protocols sshd will bind to
+#ListenAddress ::
+#ListenAddress 0.0.0.0
+ListenAddress <ip>
+ListenAddress 127.0.0.1
 ```
 Restart ssh daemon and login in with new 2222 port
 ```
@@ -70,6 +75,7 @@ $ sudo ufw default allow outgoing
 $ sudo ufw default deny incoming
 $ sudo ufw enable
 ```
+Remember to remove IPv6 rules if you don't use IPv6.
 
 ### Install and configure fail2ban
 Install fail2ban. Backup jail.conf and configure fail2ban.
